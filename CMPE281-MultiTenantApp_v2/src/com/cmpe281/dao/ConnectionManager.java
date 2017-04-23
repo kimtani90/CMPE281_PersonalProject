@@ -14,7 +14,7 @@ public class ConnectionManager {
      
       try
       {
-         String url = "jdbc:odbc:" + "cmpe281_MultiTenant"; 
+         String url = "jdbc:odbc:" + "cmpe281tenant"; 
          // assuming "DataSource" is your DataSource name
 
          //Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
@@ -22,12 +22,11 @@ public class ConnectionManager {
          
          try
          {            	
-            con = DriverManager.getConnection(url,"root","dishkim02"); 
-        	//  con=DriverManager.getConnection(  
-        	//		 "jdbc:mysql://localhost:3306/cmpe281_MultiTenant","root","dishkim02");  
+           // con = DriverManager.getConnection(url,"kimtani90","dishkim02"); 
+        	  con=DriverManager.getConnection(  
+        			 "jdbc:mysql://multitenantinstancesql.cqfoiwzat0wy.us-west-2.rds.amazonaws.com:3306/cmpe281tenant","kimtani90","dishkim02");  
              								
-         // assuming your SQL Server's	username is "username"               
-         // and password is "password"
+         
               
          }
          

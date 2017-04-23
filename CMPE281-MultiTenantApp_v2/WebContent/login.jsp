@@ -6,19 +6,34 @@
 	<head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
 		<title>Login Page</title>
+		
+  
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+
+      <link rel="stylesheet" href="./css/style.css">
+		
 	</head>
-
-	<body>
-		<form action="LoginServlet">
-
-			Please enter your username 		
-			<input type="text" name="un"/><br>		
-		
-			Please enter your password
-			<input type="text" name="pw"/>
-			
-			<input type="submit" value="submit">			
-		
-		</form>
-	</body>
+	
+	
+<body>
+ <div class="login-form">
+<form action="LoginServlet">
+ 
+     <h1>Multi Tenant App</h1>
+     <div class="form-group ">
+       <input type="text" class="form-control" placeholder="Username " name="username">
+       <i class="fa fa-user"></i>
+     </div>
+     <div class="form-group log-status">
+       <input type="password" class="form-control" placeholder="Password" name="password">
+       <i class="fa fa-lock"></i>
+     </div>
+      <span class="alert">Invalid Credentials</span>
+     
+     <button class="log-btn" type="submit" value="submit">Log in</button>
+     
+    
+ 
+</form>
+  </div>
 </html>

@@ -7,13 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
- 
-/**
- * This utility extracts files and directories of a standard zip file to
- * a destination directory.
- * @author www.codejava.net
- *
- */
+
 public class UnzipUtility {
     /**
      * Size of the buffer to read/write data
