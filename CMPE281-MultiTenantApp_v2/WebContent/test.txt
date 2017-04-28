@@ -1,4 +1,0 @@
-foo {
-  bar.baz -> obj;
-  bar.foop(obj);
-}
