@@ -15,17 +15,23 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.cmpe281.dao.TenantDAO;
 import com.cmpe281.domain.Tenant;
+import com.cmpe281.utility.UnzipUtility;
 
 public class FileUploadServlet extends HttpServlet {
     private static final String UPLOAD_DIRECTORY = "/usr/share/apache-tomcat-7.0.77/webapps/artifacts";
-  
+    private static final String IMAGE_DIRECTORY ="/usr/share/apache-tomcat-7.0.77/webapps/Tenant1/images/";
+	// private static final String UPLOAD_DIRECTORY = "E:/cmpe202-UMLParser-master";
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {  	
     	
+    	boolean imageDisplay = false;
     	
         //process only if its multipart content
+    	
+    	
         if(ServletFileUpload.isMultipartContent(request)){
             try {
                 List<FileItem> multiparts = new ServletFileUpload(
@@ -34,51 +40,44 @@ public class FileUploadServlet extends HttpServlet {
                 for(FileItem item : multiparts){
                     if(!item.isFormField()){
                         String name = new File(item.getName()).getName();                      
-                        item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
+                        item.write( new File(UPLOAD_DIRECTORY + "/" + name));
+                        
+                        UnzipUtility unzipper = new UnzipUtility();                        
+                        unzipper.unzip(UPLOAD_DIRECTORY + "/" + name, UPLOAD_DIRECTORY);
                         
                         Process process = runJar(name);
                         if(process!=null){
                         process.waitFor();
                         }
                         
-                       // UnzipUtility unzipper = new UnzipUtility();                        
-                      //  unzipper.unzip(UPLOAD_DIRECTORY + File.separator + name, UPLOAD_DIRECTORY);
+                        imageDisplay = true;
+                    	
                     }
                 }
-                HttpSession session = request.getSession(true);
-    	    	List<Tenant> tenantList = new ArrayList<Tenant>();
-    		    	Tenant t= new Tenant();
-    		    	t.setFirstName("Dishant");
-    		    	t.setLastName("Dishant");
-    		    	t.setGrade("A");
-    		    	t.setId("11");
-    		    	tenantList.add(t);
-    		    	session.setAttribute("tenantList", tenantList);
-    	    	
-    	    	
-               //File uploaded successfully
-    		    	request.setAttribute("message", "File Uploaded Successfully");
+                
+               
             } catch (Exception ex) {
                request.setAttribute("message", "File Upload Failed due to " + ex);
             }          
-         
-        }else{
-            request.setAttribute("message",
-                                 "Sorry this Servlet only handles file upload request");
         }
-    
+	    
+        
+    	HttpSession session = request.getSession(true);			
+		session.setAttribute("imageDisplay", imageDisplay);
         response.sendRedirect("fileupload.jsp");
-      //  response.sendRedirect("success.html");
-    	
-     
+      
     }
     
     public static Process runJar(String name) {
     	Process process = null;
     	try {
-	    	ProcessBuilder pb = new ProcessBuilder("java", "-jar", UPLOAD_DIRECTORY + File.separator+"sequence-10.0.jar", "--headless", UPLOAD_DIRECTORY + File.separator + name);
-			process = pb.start(); 
-			
+    		String folderName = name.substring(0, name.lastIndexOf('.'));
+	    	//ProcessBuilder pb = new ProcessBuilder("java", "-jar", UPLOAD_DIRECTORY + File.separator+"sequence-10.0.jar", "--headless", UPLOAD_DIRECTORY + File.separator + name);
+    //		System.out.println("sh "+ UPLOAD_DIRECTORY + "/"+"umlparser.sh", UPLOAD_DIRECTORY + "/"+folderName+ " image");
+    	//	ProcessBuilder pb = new ProcessBuilder("/bin/bash","sh", UPLOAD_DIRECTORY + "/"+"umlparser.sh", UPLOAD_DIRECTORY + "/"+folderName, IMAGE_DIRECTORY+"image");
+    		
+    		ProcessBuilder pb = new ProcessBuilder("java", "-jar", UPLOAD_DIRECTORY + "/"+"umlgenerator.jar", "-d",UPLOAD_DIRECTORY + "/"+folderName, "-f", IMAGE_DIRECTORY+"image" ,"-t", "1");
+    		process = pb.start();	
 			
             
         } catch (Exception ex) {
@@ -86,6 +85,7 @@ public class FileUploadServlet extends HttpServlet {
         }
     	return process;
     }
-  
+    
+   
 }
 

@@ -19,4 +19,14 @@
     <servlet-name>FileUploadServlet</servlet-name>
     <url-pattern>/FileUploadServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SaveTenantDetailsServlet</display-name>
+    <servlet-name>SaveTenantDetailsServlet</servlet-name>
+    <servlet-class>com.cmpe281.servlet.SaveTenantDetailsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveTenantDetailsServlet</servlet-name>
+    <url-pattern>/SaveTenantDetailsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -34,6 +34,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response)
 				message = "Login Successfull!";
 				   
 				//session.setAttribute("currentSessionUser",user); 
+				response.sendRedirect  ("http://multitenantalb-346108846.us-west-2.elb.amazonaws.com:8080/Tenant1/fileupload.jsp");
 				
 			}
 			
@@ -41,10 +42,10 @@ public void doGet(HttpServletRequest request, HttpServletResponse response)
 				message = "Invalid credentials!";
 				
 		} 
-			HttpSession session = request.getSession(true);			
-			session.setAttribute("message",message);
-			response.sendRedirect  ("login.jsp"); //logged-in page      	
-			//response.sendRedirect("success.html"); //logged-in page
+			
+			  
+			
+			response.sendRedirect("login.jsp"); //logged-in page
 	}	
 	
 	

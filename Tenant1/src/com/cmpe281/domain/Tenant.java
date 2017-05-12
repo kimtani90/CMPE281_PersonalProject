@@ -5,9 +5,18 @@ public class Tenant {
 	String id;
 	String firstName;
 	String lastName;
-	String grade;
+	String enrollmentId;
+	Integer scale;
+	Integer points;
+	String complete;
+	String comments;
 	
-	
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
 	public String getId() {
 		return id;
 	}
@@ -26,11 +35,29 @@ public class Tenant {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getGrade() {
-		return grade;
+	public String getEnrollmentId() {
+		return enrollmentId;
 	}
-	public void setGrade(String grade) {
-		this.grade = grade;
+	public void setEnrollmentId(String enrollmentId) {
+		this.enrollmentId = enrollmentId;
+	}
+	public Integer getScale() {
+		return scale;
+	}
+	public void setScale(Integer scale) {
+		this.scale = scale;
+	}
+	public Integer getPoints() {
+		return points;
+	}
+	public void setPoints(Integer points) {
+		this.points = points;
+	}
+	public String getComplete() {
+		return complete;
+	}
+	public void setComplete(String complete) {
+		this.complete = complete;
 	}
 	
 }

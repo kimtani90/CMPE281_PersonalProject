@@ -19,15 +19,14 @@
 
 <form action="LoginServlet">
   <div class="log-form">
-  <c:out value="${message}"></c:out>
-	<br>
+ 
      <h1>Grader Login</h1>
      <div class="form-group ">
-       <input type="text" class="form-control" placeholder="Username " name="username">
+       <input type="text" class="form-control" placeholder="Username " name="username" required>
        <i class="fa fa-user"></i>
      </div>
      <div class="form-group log-status">
-       <input type="password" class="form-control" placeholder="Password" name="password">
+       <input type="password" class="form-control" placeholder="Password" name="password" required>
        <i class="fa fa-lock"></i>
      </div>
       <span class="alert">Invalid Credentials</span>
@@ -36,13 +35,7 @@
      
   </div>
   
-  <div class="button-form">
-  	<button class="log-btn" type="submit" value="submit">Tenant 1</button><br><br><br>
-  	
-    <button class="log-btn" type="submit" value="submit">Tenant 2</button><br><br><br>
-    <button class="log-btn" type="submit" value="submit">Tenant 3</button><br><br><br>
-    <button class="log-btn" type="submit" value="submit">Tenant 4</button> 
-  </div>  
+
  
 </form>
   
